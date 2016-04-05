@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UKOuterTableViewController : UITableViewController
-- (void)printNumbers;
+- (NSString*)printNumbers;
 @end

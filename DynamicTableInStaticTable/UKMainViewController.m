@@ -28,7 +28,10 @@
 
 - (IBAction)printNumbers
 {
-    [tableVC printNumbers];
+    NSString *numbersString = [tableVC printNumbers];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Dynamic content:" message:numbersString preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

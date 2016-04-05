@@ -10,7 +10,6 @@
 #import "UKInnerTableView.h"
 
 @interface UKOuterTableViewController()<UKInnerTableViewDelegate>
-@property (nonatomic, weak) IBOutlet UKInnerTableView *innerTableView;
 @property (nonatomic, strong) NSMutableArray *models;
 @end
 
@@ -47,11 +46,14 @@
     [self.tableView endUpdates];
 }
 
-- (void)printNumbers
+- (NSString*)printNumbers
 {
+    NSMutableString *numbersString = [NSMutableString new];
     for (NSString *numberString in [self.models valueForKey:@"text"]) {
+        [numbersString appendFormat:@", %@", numberString];
         NSLog(@"%@", numberString);
     }
+    return [numbersString substringFromIndex:2];
 }
 
 @end
