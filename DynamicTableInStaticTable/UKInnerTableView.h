@@ -14,10 +14,10 @@
 @end
 
 @protocol UKInnerTableViewDelegate <NSObject>
-- (void)addNewModel;
+- (UITableView*)tableView;
 - (NSMutableArray*)models;
 @end
 
 @interface UKInnerTableView : UITableViewCell
-@property (nonatomic, weak) IBOutlet id<UKInnerTableViewDelegate> delegate;
+- (UITableView*)tableView;
 @end

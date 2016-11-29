@@ -11,6 +11,7 @@
 
 @interface UKOuterTableViewController()<UKInnerTableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *models;
+@property (nonatomic, weak) IBOutlet UKInnerTableView *innerTableView;
 @end
 
 @implementation UKOuterTableViewController
@@ -25,6 +26,8 @@
     return self;
 }
 
+#pragma mark - UITableView
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 1)
@@ -34,26 +37,51 @@
     return 44.0f;
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.row == 2;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 2)
+    {
+        [self.tableView beginUpdates];
+        [self.innerTableView.tableView beginUpdates];
+        [self.innerTableView.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.models.count inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.models addObject:[UKDummyModel modelWithText:[NSString stringWithFormat:@"%ld", self.models.count]]];
+        [self.innerTableView.tableView endUpdates];
+        [self.tableView endUpdates];
+    }
 }
 
-- (void)addNewModel
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableView beginUpdates];
-    [self.models addObject:[UKDummyModel modelWithText:[NSString stringWithFormat:@"%ld", self.models.count]]];
-    [self.tableView endUpdates];
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        cell.preservesSuperviewLayoutMargins = NO;
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
+
+#pragma mark - Action
 
 - (NSString*)printNumbers
 {
-    NSMutableString *numbersString = [NSMutableString new];
-    for (NSString *numberString in [self.models valueForKey:@"text"]) {
-        [numbersString appendFormat:@", %@", numberString];
-        NSLog(@"%@", numberString);
-    }
-    return [numbersString substringFromIndex:2];
+    return [[self.models valueForKey:@"text"] componentsJoinedByString:@", "];
 }
 
 @end

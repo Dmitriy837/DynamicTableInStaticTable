@@ -19,6 +19,7 @@
 @end
 
 @interface UKInnerTableView()<UITableViewDataSource, UITableViewDelegate, ReorderTableViewDelegate>
+@property (nonatomic, weak) IBOutlet id<UKInnerTableViewDelegate> delegate;
 @property (nonatomic, weak) BVReorderTableView *tableView;
 @end
 
@@ -37,6 +38,7 @@
         self.tableView.delegate = self;
         self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
         self.tableView.scrollEnabled = NO;
+        self.tableView.allowsSelection = NO;
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     }
     return self;
@@ -53,17 +55,47 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell.textLabel.text = [self.delegate.models[indexPath.row] text];
-    cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.2];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.delegate.models.count inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.delegate addNewModel];
-    [tableView endUpdates];
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.delegate.tableView beginUpdates];
+        [self.tableView beginUpdates];
+        [[self.delegate models] removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        [self.delegate.tableView endUpdates];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        cell.preservesSuperviewLayoutMargins = NO;
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark Reordering
