@@ -6,4 +6,4 @@ Latter solved with help of [YoCoh's answer](http://stackoverflow.com/a/27724293/
 
 ![](Demo/SemiStaticTableViewDemo.gif)
 
-*Conclusion*: never ever add subviews to UITableViewController's view, and never use dynamic cells prototypes to present static content, there are other more reliable ways to achieve the same.
+**Conclusion**: never ever add subviews to UITableViewController's view, and never use dynamic cells prototypes to present static content, there are other more reliable ways to achieve the same.
