@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050B4F8F1DEDF6C400B40875 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 050B4F8E1DEDF6C400B40875 /* README.md */; };
 		6607CF051CB3E8A9005928B2 /* BVReorderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6607CF041CB3E8A9005928B2 /* BVReorderTableView.m */; };
 		6607CF081CB3F37A005928B2 /* UKMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6607CF071CB3F37A005928B2 /* UKMainViewController.m */; };
 		664F8F2F1CB3D7DF00A580C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F8F2E1CB3D7DF00A580C5 /* main.m */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		050B4F8E1DEDF6C400B40875 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6607CF031CB3E8A9005928B2 /* BVReorderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BVReorderTableView.h; sourceTree = "<group>"; };
 		6607CF041CB3E8A9005928B2 /* BVReorderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BVReorderTableView.m; sourceTree = "<group>"; };
 		6607CF061CB3F37A005928B2 /* UKMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainViewController.h; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 		664F8F2C1CB3D7DF00A580C5 /* DynamicTableInStaticTable */ = {
 			isa = PBXGroup;
 			children = (
-				050B4F8E1DEDF6C400B40875 /* README.md */,
 				6607CF031CB3E8A9005928B2 /* BVReorderTableView.h */,
 				6607CF041CB3E8A9005928B2 /* BVReorderTableView.m */,
 				664F8F301CB3D7DF00A580C5 /* AppDelegate.h */,
@@ -171,7 +168,6 @@
 				6607CF051CB3E8A9005928B2 /* BVReorderTableView.m in Sources */,
 				664F8F461CB3D82C00A580C5 /* UKInnerTableView.m in Sources */,
 				664F8F491CB3DAD200A580C5 /* UKOuterTableViewController.m in Sources */,
-				050B4F8F1DEDF6C400B40875 /* README.md in Sources */,
 				664F8F321CB3D7DF00A580C5 /* AppDelegate.m in Sources */,
 				664F8F2F1CB3D7DF00A580C5 /* main.m in Sources */,
 				6607CF081CB3F37A005928B2 /* UKMainViewController.m in Sources */,
